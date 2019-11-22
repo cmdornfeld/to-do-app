@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const pool = require('./modules/pool');
 
 const PORT = 5000;
 
