@@ -23,3 +23,15 @@ app.get('/tasks', (req, res)=>{
         res.sendStatus(400);
     });
 });
+
+app.post('/tasks', (req, res)=>{
+    console.log('in /tasks POST', req.body);
+    let task = req.body;
+    let queryText = `INSERT INTO "tasks" ("task") VALUES ($1);`;
+    pool.query(queryText, [task.task]).then(result=>{
+        res.sendStatus(200);
+    }).catch(error =>{
+        res.sendStatus(400);
+        console.log('error adding task', error);
+    });
+});

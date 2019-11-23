@@ -38,7 +38,7 @@ function addTask() {
         url: '/tasks',
         data: objectToSend
     }).then(function (response) {
-        
+        displayTasks();
     }).catch(function (error) {
         console.log(error);
         alert('ERROR adding task!!!!!!!!')
