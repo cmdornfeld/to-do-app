@@ -14,7 +14,7 @@ app.listen(PORT, ()=>{
 
 app.get('/tasks', (req, res)=>{
     console.log('in /tasks GET');
-    let queryText = `SELECT * FROM "tasks";`;
+    let queryText = `SELECT * FROM "tasks" ORDER BY "id";`;
     pool.query(queryText).then(result =>{
         res.send(result.rows);
     })
@@ -50,8 +50,19 @@ app.delete('/delete/:id', (req, res)=>{
 
 app.put('/complete/:id', (req, res)=>{
     let id = req.params.id;
-    console.log('');
-    let queryText = `UPDATE "tasks" SET "status" = "Complete" WHERE id = $1;`;
     let task = req.body;
-    pool.query(queryText, [task.status])
-})
+    let status = task.status;
+    let queryText = ``;
+    console.log('Editing id:', task, id);
+    if (status === 'Incomplete'){
+        queryText = `UPDATE "tasks" SET "status" = 'Complete' WHERE id = $1;`;
+    } else if (status === 'Complete'){
+        queryText = `UPDATE "tasks" SET "status" = 'Incomplete' WHERE id = $1;`;
+    }
+    pool.query(queryText, [id]).then(result =>{
+        res.sendStatus(200);
+    }).catch(error =>{
+        console.log(error);
+        res.sendStatus(400);
+    });
+});

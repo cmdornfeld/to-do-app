@@ -4,11 +4,12 @@ function onReady() {
     console.log('JQ');
     $('#submit-btn').on('click', addTask);
     $('#task-output').on('click', '.remove-btn', deleteTask);
+    $('#task-output').on('click', '.complete-btn', completeTask);
     displayTasks();
 }
 
 function displayTasks() {
-    console.log('in getTasks');
+    console.log('in displayTasks');
     $.ajax({
         type: 'GET',
         url: '/tasks'
@@ -23,8 +24,11 @@ function displayTasks() {
             <td><button class="complete-btn">Complete</button></td>
             <td><button class="remove-btn">Remove</button></td>
             `);
-        el.data('id', task.id);
-        target.append(el);
+            el.data('id', task.id);
+            target.append(el);
+            if (task.status === 'Complete'){
+                el.addClass('green');
+            }
         }
         }).catch(function (error) {
             alert('ERROR getting tasks!!!!!!!!')
@@ -43,6 +47,7 @@ function addTask() {
         data: objectToSend
     }).then(function (response) {
         displayTasks();
+        $('#task-in').val('');
     }).catch(function (error) {
         console.log(error);
         alert('ERROR adding task!!!!!!!!')
@@ -58,5 +63,24 @@ function deleteTask() {
         displayTasks();
     }).catch(function (error) {
         alert(`DIDN'T Delete!!!!!!`)
+    })
+}
+
+function completeTask() {
+    let id = $(this).closest('tr').data('id');
+    console.log(id);
+    let status = $(this).closest('tr').children()[1].textContent;
+    console.log(status);
+    $.ajax({
+        method: 'PUT',
+        url: '/complete/' + id,
+        data: {
+            status: status
+        }
+    }).then(function(response){
+        displayTasks();
+    }).catch(function (error) {
+        alert('ERROR completing task!!!!!!');
+        console.log(error);
     })
 }
