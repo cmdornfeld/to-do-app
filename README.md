@@ -1,9 +1,7 @@
-# Project Name
+# Project Description
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+This project is a TO-DO list application, which gives the user the opportunity to create tasks, add them to and store them in a database, mark them as complete (or back to incomplete if needed), or remove the task entirely.
 
-## Description
+In order to create this application, I mapped out how the functionality would work, and then began to code according to the map that I created.  I would start with server request, test them in Postman, and once I could prove the requests would work, I would then move to the client side for the corresponding functionality.
 
-Your project description goes here. What problem did you solve? How did you solve it?
-
-Additional README details can be found [here](https://github.com/PrimeAcademy/github-finalization-assignment).
+Overall, this was a good project for me to better my understanding of the full stack, improve my comfort level with testing ("Postman"), and get more confident with Bootstrap styling.
