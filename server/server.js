@@ -35,3 +35,23 @@ app.post('/tasks', (req, res)=>{
         console.log('error adding task', error);
     });
 });
+
+app.delete('/delete/:id', (req, res)=>{
+    let id = req.params.id;
+    console.log('DELETE route hit with id:', id);
+    let queryText = `DELETE FROM "tasks" WHERE "id" = $1;`;
+    pool.query(queryText, [id]).then(result =>{
+        res.sendStatus(200);
+    }).catch(error =>{
+        console.log(error);
+        res.sendStatus(400);
+    });
+});
+
+app.put('/complete/:id', (req, res)=>{
+    let id = req.params.id;
+    console.log('');
+    let queryText = `UPDATE "tasks" SET "status" = "Complete" WHERE id = $1;`;
+    let task = req.body;
+    pool.query(queryText, [task.status])
+})

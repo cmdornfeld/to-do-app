@@ -3,6 +3,7 @@ $(document).ready(onReady);
 function onReady() {
     console.log('JQ');
     $('#submit-btn').on('click', addTask);
+    $('#task-output').on('click', '.remove-btn', deleteTask);
     displayTasks();
 }
 
@@ -16,12 +17,15 @@ function displayTasks() {
     target.empty();
         for (let i = 0; i<response.length; i++) {
             let task = response[i];
-            target.append(`<tr>
+            let el = $(`<tr>
             <td>${task.task}</td>
             <td>${task.status}</td>
-            <button class="complete-btn">Complete</button>
-            <button class="remove-btn">Remove</button>
-            `)}
+            <td><button class="complete-btn">Complete</button></td>
+            <td><button class="remove-btn">Remove</button></td>
+            `);
+        el.data('id', task.id);
+        target.append(el);
+        }
         }).catch(function (error) {
             alert('ERROR getting tasks!!!!!!!!')
             console.log(error);
@@ -42,5 +46,17 @@ function addTask() {
     }).catch(function (error) {
         console.log(error);
         alert('ERROR adding task!!!!!!!!')
+    })
+}
+
+function deleteTask() {
+    const id = $(this).closest('tr').data('id');
+    $.ajax({
+        type: 'DELETE',
+        url: '/delete/' + id,
+    }).then(function(response){
+        displayTasks();
+    }).catch(function (error) {
+        alert(`DIDN'T Delete!!!!!!`)
     })
 }
