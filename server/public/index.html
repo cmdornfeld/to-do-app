@@ -7,18 +7,18 @@
     <title>SQL To-Do List</title>
     <script src="vendors/jquery-3.4.1.min.js"></script>
     <script src="scripts/client.js"></script>
-    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="./vendors/bootstrap-4.3.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     <h1>The To-Do App</h1>
     <div id="task-input">
         <input id="task-in" type="text" placeholder="Type task here">
-        <button id="submit-btn">Submit</button>
+        <button class="btn btn-primary" id="submit-btn" title="Click submit to add task">Submit</button>
     </div>
     <div id="display-table">
-        <table>
-            <thead>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
                 <th>Task Name</th>
                 <th>Status</th>
                 <th>&nbsp;</th> <!-- Complete btn -->
