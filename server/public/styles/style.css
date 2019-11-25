@@ -4,6 +4,13 @@
 
 h1 {
     margin: 1.0rem;
+    text-align: center;
+}
+
+input {
+    width: 75%;
+    padding: 0.2rem 0.4rem;
+    box-sizing: border-box;
 }
 
 body {
@@ -11,7 +18,8 @@ body {
 }
 
 #task-input {
-    margin: 1.5rem
+    margin: 1.5rem;
+    text-align: center;
 }
 
 .complete-btn {
@@ -20,7 +28,6 @@ body {
     text-align: center;
     padding: 0.5rem 1rem;
     border-radius: .5rem;
-    transform: translateY(0.2rem);
 }
 
 .remove-btn {
@@ -30,5 +37,4 @@ body {
     text-align: center;
     padding: 0.5rem 1rem;
     border-radius: .5rem;
-    transform: translateY(0.2rem);
 }
